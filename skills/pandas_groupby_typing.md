@@ -33,7 +33,17 @@ Use `Literal` unions (e.g., `ReductionKernelType`) to type string-based aggregat
   def aggregate(self, func: Literal["sum", "mean", ...]) -> NDFrameT: ...
   ```
 
+### 6. GroupBy Specific Deprecations and Changes in 3.0
+- **Keyword-Only Arguments**: Deprecated non-keyword arguments in `groupby()` except for `by` and `level`.
+- **`sum`, `mean`, `median`, `prod`, `min`, `max`, `std`, `var`, `sem`**: Now accept a `skipna` parameter.
+- **`NamedAgg`**: Now supports passing `*args` and `**kwargs` to the `aggfunc`.
+- **`Rolling` and `Expanding`**: Added `first()`, `last()`, `nunique()`, and `pipe()` methods.
+- **`ResamplerGroupBy`**: `interpolate()` should be excluded from this class (split from `Resampler`).
+- **`pct_change()`**: Argument `limit` is deprecated and must be `None`.
+- **`interpolate()`**: Prevented from being used on datetime-like objects within `groupby.resample` operations.
+
 ## Best Practices
 - **Track the Key**: Use a `ByT` generic to track what was used for grouping (e.g., `Hashable`, `Sequence`, or `Index`).
 - **Callable Overloads**: Provide detailed overloads for `apply` and `transform` to handle different lambda signatures (e.g., `Callable[[Series], Scalar]` vs `Callable[[Series], Series]`).
 - **Internal Aliases**: Use private type variables like `_TT` for internal logic switching to keep the public API clean.
+- **Consistency with NDFrame**: Ensure that arguments and deprecations in GroupBy methods are kept in sync with the corresponding methods in `Series` and `DataFrame`.
