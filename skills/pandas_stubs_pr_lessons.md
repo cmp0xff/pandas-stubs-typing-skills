@@ -197,7 +197,7 @@ Ensure all contributions, especially PR sign-offs, are signed with the correct i
 When modifying PR descriptions, always preserve the project's standard checklist and checkbox section from the repository's PR template. This ensures maintainers can easily verify that project-specific requirements (like AI usage disclosure or testing standards) have been met.
 
 ### 119. Issue Numbers in Titles
-Always include the primary master tracker or issue number (e.g., `GH1579`) in the PR title. This improves the indexing and traceability of changes within the project's pull request history and makes it easier for maintainers to identify the scope of the contribution at a glance.
+Always include the primary master tracker or issue number (e.g., `#1579` or `pandas-dev/pandas-stubs#1579`) in the PR title. This ensures that GitHub correctly creates a link to the issue, improving the indexing and traceability of changes within the project's pull request history. Avoid using the `GH1579` format in titles as it does not automatically link.
 
 ### 120. Dynamic Bot Signature
 Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
@@ -515,7 +515,7 @@ Ensure all contributions, especially PR sign-offs, are signed with the correct i
 When modifying PR descriptions, always preserve the project's standard checklist and checkbox section from the repository's PR template. This ensures maintainers can easily verify that project-specific requirements (like AI usage disclosure or testing standards) have been met.
 
 ### 119. Issue Numbers in Titles
-Always include the primary master tracker or issue number (e.g., `GH1579`) in the PR title. This improves the indexing and traceability of changes within the project's pull request history and makes it easier for maintainers to identify the scope of the contribution at a glance.
+Always include the primary master tracker or issue number (e.g., `#1579` or `pandas-dev/pandas-stubs#1579`) in the PR title. This ensures that GitHub correctly creates a link to the issue, improving the indexing and traceability of changes within the project's pull request history. Avoid using the `GH1579` format in titles as it does not automatically link.
 
 ### 120. Dynamic Bot Signature
 Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
