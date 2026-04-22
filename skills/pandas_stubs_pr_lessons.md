@@ -193,6 +193,15 @@ Always identify and link the original `pandas-dev/pandas` issues or PRs that imp
 ### 117. Versioned Persona and Identity
 Ensure all contributions, especially PR sign-offs, are signed with the correct identity and version as specified (e.g., Gemini 3). This maintains consistency in communication across different project components.
 
+### 118. Template Integrity
+When modifying PR descriptions, always preserve the project's standard checklist and checkbox section from the repository's PR template. This ensures maintainers can easily verify that project-specific requirements (like AI usage disclosure or testing standards) have been met.
+
+### 119. Issue Numbers in Titles
+Always include the primary master tracker or issue number (e.g., `GH1579`) in the PR title. This improves the indexing and traceability of changes within the project's pull request history and makes it easier for maintainers to identify the scope of the contribution at a glance.
+
+### 120. Dynamic Bot Signature
+Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
+
 ## Best Practices
 - **Centralize Aliases**: Move complex unions and literal lists to `_typing.pyi` or specialized `base.pyi` files within modules.
 - **Literal Value Defaults**: Use literal values for "simple" defaults (e.g., `axis=0`, `inplace=False`, `None`) in stubs.
@@ -496,5 +505,14 @@ Always identify and link the original `pandas-dev/pandas` issues or PRs that imp
 
 ### 117. Versioned Persona and Identity
 Ensure all contributions, especially PR sign-offs, are signed with the correct identity and version as specified (e.g., Gemini 3). This maintains consistency in communication across different project components.
+
+### 118. Template Integrity
+When modifying PR descriptions, always preserve the project's standard checklist and checkbox section from the repository's PR template. This ensures maintainers can easily verify that project-specific requirements (like AI usage disclosure or testing standards) have been met.
+
+### 119. Issue Numbers in Titles
+Always include the primary master tracker or issue number (e.g., `GH1579`) in the PR title. This improves the indexing and traceability of changes within the project's pull request history and makes it easier for maintainers to identify the scope of the contribution at a glance.
+
+### 120. Dynamic Bot Signature
+Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
 
 ## Best Practices
