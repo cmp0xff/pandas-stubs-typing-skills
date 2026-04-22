@@ -202,6 +202,11 @@ Always include the primary master tracker or issue number (e.g., `GH1579`) in th
 ### 120. Dynamic Bot Signature
 Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
 
+### 121. Non-Interactive Gemini CLI Usage
+When executing `gemini` CLI commands via shell tools (e.g., `run_shell_command`), avoid using positional arguments that might trigger an interactive session.
+- **Problem**: Positional arguments now default to interactive mode in the Gemini CLI, which can cause the shell command to hang or require manual user intervention (e.g., typing `/quit`).
+- **Solution**: Always use the `--prompt` (or `-p`) flag for non-interactive execution to ensure the command terminates automatically after processing the request.
+
 ## Best Practices
 - **Centralize Aliases**: Move complex unions and literal lists to `_typing.pyi` or specialized `base.pyi` files within modules.
 - **Literal Value Defaults**: Use literal values for "simple" defaults (e.g., `axis=0`, `inplace=False`, `None`) in stubs.
@@ -514,5 +519,10 @@ Always include the primary master tracker or issue number (e.g., `GH1579`) in th
 
 ### 120. Dynamic Bot Signature
 Use a dynamic and specific signature (e.g., `🤖 Created by Gemini (model: ...)`) to provide clear attribution and context about the model used for the contribution. Avoid using generic or static signatures when more precise model information is available in the environment or session metadata.
+
+### 121. Non-Interactive Gemini CLI Usage
+When executing `gemini` CLI commands via shell tools (e.g., `run_shell_command`), avoid using positional arguments that might trigger an interactive session.
+- **Problem**: Positional arguments now default to interactive mode in the Gemini CLI, which can cause the shell command to hang or require manual user intervention (e.g., typing `/quit`).
+- **Solution**: Always use the `--prompt` (or `-p`) flag for non-interactive execution to ensure the command terminates automatically after processing the request.
 
 ## Best Practices
