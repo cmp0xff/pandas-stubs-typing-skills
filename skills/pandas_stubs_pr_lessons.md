@@ -431,4 +431,20 @@ In pandas 3.0, `IncompatibleFrequency` (in `pandas.errors`) subclasses `TypeErro
 ### 109. Removal of `mode.use_inf_as_na` and `swapaxes`
 These options and methods have been removed in pandas 3.0. Stubs should remove them to prevent users from using deprecated/removed APIs.
 
+### 110. The Overload-Overlap Trap with Subclasses
+When adding an overload returning `Never` for a specific type (e.g., `datetime.date`), mypy will flag an `overload-overlap` if a previous overload accepts a subclass (e.g., `datetime.datetime`) and returns a different type.
+- **Problem**: Mypy sees that the subclass (`datetime`) *also* matches the base class (`date`) overload, and if the return types differ (`bool` vs `Never`), it reports an error.
+- **Solution**: Apply `type: ignore[overload-overlap]` precisely to the overlapping `@overload` decorator.
+- **Note**: The placement of the ignore is critical; putting it on the `def` statement may not satisfy mypy in all versions.
+
+### 111. The Reachability Trap with `Never`
+Using `assert_type(x, Never)` in tests causes mypy to identify subsequent code in the same block as unreachable.
+- **Problem**: `Statement is unreachable [unreachable]` errors in existing test suites when adding new `Never` restrictions.
+- **Solution**: Use `if TYPE_CHECKING:` blocks and ensure the `Never` assertion is the last statement in its block, or use `Any` casting to "break" the `Never` propagation if you must continue execution in the same test function.
+
+### 112. Prefer Standard `TYPE_CHECKING` for Tests
+Avoid relying on `pd.api.typing.TYPE_CHECKING` in tests for guarding type-checker-only code.
+- **Problem**: The pandas stubs may not always export `TYPE_CHECKING` in a way that satisfies all type checkers in all contexts, leading to `attr-defined` errors.
+- **Solution**: Always import `TYPE_CHECKING` from the standard `typing` module.
+
 ## Best Practices

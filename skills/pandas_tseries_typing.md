@@ -32,6 +32,12 @@ Many functions that previously only accepted pandas-specific offset strings or o
 ### 5. NaT Comparison Stricter Behavior
 - **`NaT` vs `datetime.date`**: Comparisons between `NaT` and `datetime.date` objects now raise on inequality comparisons (`<`, `<=`, `>`, `>=`). The stubs should reflect this by potentially using `Never` or documenting the raising behavior for these specific types.
 
+### 6. Removal of Deprecated Timedelta Units
+Support for ambiguous units `'Y'`, `'y'`, and `'M'` has been removed from `pd.Timedelta` and `pd.to_timedelta` (Issue #36666, PR #36838).
+- **Pattern**: Remove these literals from `TimeDeltaUnitChoices` or `UnitChoices` aliases.
+- **Verification**: Use `if TYPE_CHECKING_INVALID_USAGE:` blocks in tests with `# type: ignore[arg-type]` or `# type: ignore[call-overload]` to verify that these units now trigger type errors.
+- **Location**: These tests should ideally be placed in `tests/scalars/test_scalars.py` (for `pd.Timedelta` construction) or alongside other `to_timedelta` tests.
+
 ## Best Practices
 - **Union Alignment**: Always check if `timedelta` should be added to `Offset` or `Frequency` type aliases when pandas updates its support.
 - **Explicit Timezones**: When typing methods that involve UTC or other timezones, prefer signatures that encourage passing the timezone as an argument rather than using deprecated specialized methods.
