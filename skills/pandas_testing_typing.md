@@ -20,6 +20,21 @@ Testing functions often accept a variety of types for comparison, especially for
 - **Note**: Ensure that the stubs reflect the actual flexibility of the runtime (e.g., comparing a `RangeIndex` with a generic `Index`).
 - **`assert_type`**: Mandatory for new tests in `pandas-stubs` to verify return types of public methods.
 
+### 4. Grouping Positive and Negative Tests
+When writing type tests for `pandas-stubs`, it is a design pattern to group both positive runtime type checks and negative static typing checks within the same conceptual test function.
+- **Goal**: Consolidate all typing behavior for a specific feature (e.g., construction or arithmetic) in one place to improve discoverability.
+- **Pattern**:
+    ```python
+    def test_feature_behavior() -> None:
+        # Positive runtime test
+        check(assert_type(pd.Feature(...), ExpectedType), ExpectedType)
+        
+        # Negative static test (guarded)
+        if TYPE_CHECKING_INVALID_USAGE:
+            pd.Feature(invalid_arg=...)  # type: ignore[arg-type]
+    ```
+- **Rationale**: Keeps the test suite clean and ensures that the "boundary" of what is valid vs. invalid is clearly documented together.
+
 ## Best Practices
 - **Mirror Runtime Deprecations**: If a parameter starts raising a `FutureWarning` at runtime, it should be noted or handled carefully in the stubs to warn users.
 - **Strictness where Necessary**: Use `bool` for flags rather than `Any` to provide better type safety during testing development.
