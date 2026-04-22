@@ -168,6 +168,31 @@ Ensure that core properties like `.index` return the same type across different 
 ### 37. Categorical Index Return Types
 When creating a categorical index (e.g., `pd.Index(..., dtype="category")`), the stubs should return `CategoricalIndex` rather than a generic `Index[CategoricalDtype]`. This ensures that categorical-specific methods and attributes are available to the user.
 
+### 113. Supersede to Upstream PR Workflow
+When a contribution made on a fork's PR (e.g., `cmp0xff/pandas-stubs`) is ready for final submission to the official project (`pandas-dev/pandas-stubs`), it should be "superseded" rather than just merged or abandoned.
+- **Workflow**:
+    1.  Refresh the local branch against `origin/main` (of the project).
+    2.  Consolidate tests into established patterns (e.g., merging valid and invalid construction tests).
+    3.  Create the new PR on the upstream repository targeting `main`.
+    4.  Close the original fork PR with a link/comment referencing the new upstream PR.
+- **Benefit**: Ensures a clean history in the main repository and centralizes discussion on the official project while preserving the context of the original work.
+
+### 114. Master Tracker Management
+When working on a sub-task for a master tracker or a large compatibility issue (e.g., #1579), never use the `Closes` keyword in the PR description for the tracker itself.
+- **Rule**: Use `Part of #XXXX` instead.
+- **Rationale**: Using `Closes` will cause GitHub to automatically close the tracker issue once the PR is merged, which may prematurely end the tracking of other unrelated sub-tasks.
+
+### 115. Clean Upstream References
+Maintain a professional and focused history in the upstream repository by avoiding references to personal fork PRs in the description of the upstream PR.
+- **Pattern**: Link the upstream PR from the fork PR (to provide continuity for yourself/team), but keep the upstream PR focused strictly on the feature, tests, and its relation to the upstream tracker.
+
+### 116. Source Attribution for Runtime Changes
+Always identify and link the original `pandas-dev/pandas` issues or PRs that implemented the runtime change being mirrored in the stubs.
+- **Benefit**: Provides immediate technical justification and context for the stub change, helping maintainers verify the correctness of the new typing rules against the official pandas implementation.
+
+### 117. Versioned Persona and Identity
+Ensure all contributions, especially PR sign-offs, are signed with the correct identity and version as specified (e.g., Gemini 3). This maintains consistency in communication across different project components.
+
 ## Best Practices
 - **Centralize Aliases**: Move complex unions and literal lists to `_typing.pyi` or specialized `base.pyi` files within modules.
 - **Literal Value Defaults**: Use literal values for "simple" defaults (e.g., `axis=0`, `inplace=False`, `None`) in stubs.
@@ -446,5 +471,30 @@ Using `assert_type(x, Never)` in tests causes mypy to identify subsequent code i
 Avoid relying on `pd.api.typing.TYPE_CHECKING` in tests for guarding type-checker-only code.
 - **Problem**: The pandas stubs may not always export `TYPE_CHECKING` in a way that satisfies all type checkers in all contexts, leading to `attr-defined` errors.
 - **Solution**: Always import `TYPE_CHECKING` from the standard `typing` module.
+
+### 113. Supersede to Upstream PR Workflow
+When a contribution made on a fork's PR (e.g., `cmp0xff/pandas-stubs`) is ready for final submission to the official project (`pandas-dev/pandas-stubs`), it should be "superseded" rather than just merged or abandoned.
+- **Workflow**:
+    1.  Refresh the local branch against `origin/main` (of the project).
+    2.  Consolidate tests into established patterns (e.g., merging valid and invalid construction tests).
+    3.  Create the new PR on the upstream repository targeting `main`.
+    4.  Close the original fork PR with a link/comment referencing the new upstream PR.
+- **Benefit**: Ensures a clean history in the main repository and centralizes discussion on the official project while preserving the context of the original work.
+
+### 114. Master Tracker Management
+When working on a sub-task for a master tracker or a large compatibility issue (e.g., #1579), never use the `Closes` keyword in the PR description for the tracker itself.
+- **Rule**: Use `Part of #XXXX` instead.
+- **Rationale**: Using `Closes` will cause GitHub to automatically close the tracker issue once the PR is merged, which may prematurely end the tracking of other unrelated sub-tasks.
+
+### 115. Clean Upstream References
+Maintain a professional and focused history in the upstream repository by avoiding references to personal fork PRs in the description of the upstream PR.
+- **Pattern**: Link the upstream PR from the fork PR (to provide continuity for yourself/team), but keep the upstream PR focused strictly on the feature, tests, and its relation to the upstream tracker.
+
+### 116. Source Attribution for Runtime Changes
+Always identify and link the original `pandas-dev/pandas` issues or PRs that implemented the runtime change being mirrored in the stubs.
+- **Benefit**: Provides immediate technical justification and context for the stub change, helping maintainers verify the correctness of the new typing rules against the official pandas implementation.
+
+### 117. Versioned Persona and Identity
+Ensure all contributions, especially PR sign-offs, are signed with the correct identity and version as specified (e.g., Gemini 3). This maintains consistency in communication across different project components.
 
 ## Best Practices
